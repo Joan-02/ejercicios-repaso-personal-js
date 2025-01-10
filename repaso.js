@@ -1,3 +1,6 @@
+//EJERCICIOS DE INTERNET O CHAT GPT
+
+
 /*
   Crear una función que me diga si un número está entre 0 y 10  
    => utilizar un return;
