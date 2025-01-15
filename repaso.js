@@ -831,3 +831,33 @@ const countProductsByCategory = (products) => {
 };
 
 console.log(countProductsByCategory(PRODUCTS));
+
+// Clasificación de tareas completadas
+
+const tasks = [
+    { text: 'Hacer la compra', category: 'personal', completed: true },
+    { text: 'Estudiar JavaScript', category: 'work', completed: true },
+    { text: 'Ir al gimnasio', category: 'personal', completed: false },
+    { text: 'Revisar correos', category: 'work', completed: true },
+    { text: 'Pasear al perro', category: 'personal', completed: true },
+    { text: 'Organizar la reunión', category: 'work', completed: false }
+];
+
+const tasksCompleted = {};
+
+const countCompletedByCategory = (tasks) => {
+    tasks.forEach((task) => {
+
+        if (!task.completed) {
+            return;
+        }
+
+        tasksCompleted[task.category] = tasksCompleted[task.category] || 0; 
+        tasksCompleted[task.category] += 1;
+
+    })
+
+    return tasksCompleted
+}
+
+console.log(countCompletedByCategory(tasks));
