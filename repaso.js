@@ -861,3 +861,115 @@ const countCompletedByCategory = (tasks) => {
 }
 
 console.log(countCompletedByCategory(tasks));
+
+// TAREAS COMPLETADAS E INCOMPLETADAS
+
+const tasks = [
+    { text: 'Hacer la compra', category: 'personal', completed: true },
+    { text: 'Estudiar JavaScript', category: 'work', completed: false },
+    { text: 'Ir al gimnasio', category: 'personal', completed: false },
+    { text: 'Revisar correos', category: 'work', completed: true },
+    { text: 'Pasear al perro', category: 'personal', completed: true },
+    { text: 'Organizar la reunión', category: 'work', completed: false }
+];
+
+const tasksByCategory = {};
+
+const countTasksByCategory = (tasks) => {
+    tasks.forEach((task) => {
+
+        tasksByCategory[task.category] = tasksByCategory[task.category] || 0;
+        tasksByCategory[task.category] += 1;
+    })
+    
+    return tasksByCategory
+};
+
+console.log(countTasksByCategory(tasks));
+
+// VENTAS
+
+const salesByCategory = { electronics: 200, clothing: 150, groceries: 100, books: 50 };
+
+const getTotalSales = (salesByCategory) => {
+    let totalSales = 0;
+
+    Object.keys(salesByCategory).forEach((category) => {
+
+        count = salesByCategory[category];
+        totalSales += count;
+    })
+
+    return totalSales;
+}
+
+console.log(getTotalSales(salesByCategory))
+
+const updateSales = (category) => {
+
+    if (salesByCategory[category]) {
+      salesByCategory[category] += 1;
+    } else {
+      salesByCategory[category] = 1;
+    }
+  };
+  
+updateSales('electronics'); 
+updateSales('furniture');    
+console.log(salesByCategory);
+
+// GESTIÓN DE INVENTARIO
+
+const inventory = {
+    electronics: 100,
+    clothing: 200,
+    groceries: 300,
+};
+  
+const sellProduct = (category, quantity) => {
+    Object.keys(inventory).forEach((item) => {
+      if (item === category) {
+        if (quantity >= inventory[item]) {
+          inventory[item] = 0;
+        } else {
+          inventory[item] -= quantity;
+        }
+      }
+    });
+};
+
+sellProduct('electronics', 50); // Vende 50 productos de 'electronics'
+sellProduct('clothing', 250); // Vende 250 productos de 'clothing'
+console.log(inventory);
+    
+// GESTION DE JUGADORES
+
+const players = {
+    Alice: 10,
+    Bob: 15,
+    Charlie: 8
+  };
+  
+const updatePlayerScore = (players, playerName, score) => {
+    let maxScore = 0;
+
+    Object.keys(players).forEach((player) => {
+
+        if (players[playerName] === undefined) {
+            players[playerName] = score;
+        }
+
+        if (players[playerName] !== undefined) {
+            players[playerName] += score;
+        }        
+    })
+
+    const highestScore = Math.max(...Object.values(players));  // Obtiene el valor más alto
+
+    return highestScore;
+}  
+
+const highestScore = updatePlayerScore(players, 'David', 5);
+console.log("La puntuación más alta es:", highestScore);
+updatePlayerScore(players, 'David', 5); 
+console.log(players);
