@@ -973,3 +973,101 @@ const highestScore = updatePlayerScore(players, 'David', 5);
 console.log("La puntuación más alta es:", highestScore);
 updatePlayerScore(players, 'David', 5); 
 console.log(players);
+
+//Registro de Ventas por Tienda y Fecha
+
+const generateRandomSales = (num) => {
+
+    const stores = ["Tienda A", "Tienda B", "Tienda C"];
+    const salesList = [];
+
+    for (let i = 0; i < num; i++) {
+        const randomStore = stores[Math.floor(Math.random() * stores.length)];
+        const randomDollars = Math.floor(Math.random() * 499) + 10;
+        const randomDay = Math.floor(Math.random() * 31) + 1;
+        const randomMonth = Math.floor(Math.random() * 12);
+        const dateRandom = new Date(2025, randomMonth, randomDay);
+
+        salesList.push({
+            store: randomStore,
+            amount: randomDollars,
+            date: dateRandom
+        });
+    }
+
+    return salesList;
+}
+
+const categorizeSalesByStoreAndDate = (salesList) => {
+
+    const salesListObject = {}
+
+    salesList.forEach((sale) => {
+
+        const storeName = sale.store;
+        const month = sale.date.getMonth() + 1;  // +1 porque los meses van de 0 a 11
+        const day = sale.date.getDate();
+
+        if (!salesListObject[storeName]) {
+            salesListObject[storeName] = {}
+        }
+
+        if (!salesListObject[storeName][month]) {
+            salesListObject[storeName][month] = {};
+        }
+
+        if (!salesListObject[storeName][month][day]) {
+            salesListObject[storeName][month][day] = [];
+        }
+
+        salesListObject[storeName][month][day].push(sale);
+    })
+
+    return salesListObject;
+}
+
+
+const sales = generateRandomSales(10);
+console.dir(categorizeSalesByStoreAndDate(sales), { depth: null });
+
+// Contador de palabras en una frase
+
+const countWords = (sentence) => {
+
+    const sentenceToArray = sentence.split(" ")
+    const counterWords = {};
+
+    sentenceToArray.forEach((word) => {
+
+        if(!counterWords[word]) {
+            counterWords[word] = 0;
+        }
+        
+        counterWords[word] += 1;
+    })
+
+    return counterWords;
+}
+
+console.log(countWords("hola mundo hola hola chatgpt mundo"));
+
+// Contador de letras en una frase
+
+const countLetters = (sentence) => {
+    const sentenceToArray = sentence.split("");  
+
+    const counterLetters = {};  
+
+    sentenceToArray.forEach((letter) => {
+        if (letter !== " ") { 
+            if (!counterLetters[letter]) {
+                counterLetters[letter] = 0;  
+            }
+            counterLetters[letter] += 1;  
+        }
+    })
+
+    return counterLetters;  
+}
+
+console.log(countLetters("hello world"));
